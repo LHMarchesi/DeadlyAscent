@@ -15,6 +15,6 @@ MonoBehaviour:
   Name: Zombie
   Health: 100
   Armor: 30
-  Speed: 5.57
+  Speed: 3
   BaseDamage: 10
   AttackSpeed: 1
