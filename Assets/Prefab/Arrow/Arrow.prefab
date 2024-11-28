@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8986421505165747094}
   - component: {fileID: 7467722565580320073}
   m_Layer: 0
-  m_Name: Projectil
+  m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeoutDelay: 3
+  damage: 0
 --- !u!65 &8986421505165747094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146,4 +147,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

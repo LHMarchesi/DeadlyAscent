@@ -1822,6 +1822,37 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!1 &963182641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 963182642}
+  m_Layer: 0
+  m_Name: ShootPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &963182642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963182641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.606}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1798664341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -2177,7 +2208,6 @@ MonoBehaviour:
     isEnabled: 1
     shouldStopSpawning: 0
     currentTimer: 0
-  spawnPoint: {fileID: 0}
 --- !u!65 &1575816519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2613,7 +2643,8 @@ Transform:
   m_LocalPosition: {x: -0.5450001, y: 0.054999948, z: 0.6750001}
   m_LocalScale: {x: 0.308544, y: 0.28, z: 0.4069}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 963182642}
   m_Father: {fileID: 892290519}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1798664342
@@ -2628,9 +2659,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76debeb7b85ace4087cabb24678445c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7941819548178269499, guid: 01003141edf33f843afc95ad82df6fdf, type: 3}
-  muzzleVelocity: 700
-  muzzlePosition: {fileID: 1798664341}
+  arrowPrefab: {fileID: 7941819548178269499, guid: 01003141edf33f843afc95ad82df6fdf, type: 3}
+  shootingForce: 100
+  shootPosition: {fileID: 963182642}
   cooldownWindow: 1
 --- !u!65 &1798664343
 BoxCollider:

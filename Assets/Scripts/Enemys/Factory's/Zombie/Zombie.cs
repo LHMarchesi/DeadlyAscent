@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 public enum States
@@ -5,7 +6,7 @@ public enum States
     idle, attacking, walkingAround, followingPlayer
 }
 
-public class Zombie : MonoBehaviour
+public class Zombie : MonoBehaviour, IDamagable
 {
     [SerializeField] private Enemy enemyData;
     [SerializeField] private float visionRange;
@@ -15,6 +16,7 @@ public class Zombie : MonoBehaviour
     private PlayerController player;
     [SerializeField] private States currentState;
     private float attackCooldownTimer = 0;
+    private float currentHealth;
 
     void Awake()
     {
@@ -73,6 +75,7 @@ public class Zombie : MonoBehaviour
     private void InitializeEnemy()
     {
         currentState = States.idle;
+        currentHealth = enemyData.Health;
     }
 
     private bool isPlayerOnRange()
@@ -135,5 +138,15 @@ public class Zombie : MonoBehaviour
         // Color para el rango de ataque
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    public void GetDamage(float damage)
+    {
+        currentHealth -= damage;
+        Debug.Log(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
