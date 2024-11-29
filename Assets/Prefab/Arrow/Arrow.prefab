@@ -98,8 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebc979914c2bad44af0d42d45fd1658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeoutDelay: 3
-  damage: 0
+  projectilData: {fileID: 11400000, guid: 8757dba60e657814fb71caaeb52d2fbe, type: 2}
 --- !u!65 &8986421505165747094
 BoxCollider:
   m_ObjectHideFlags: 0

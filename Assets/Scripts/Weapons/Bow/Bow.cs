@@ -1,67 +1,64 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Bow : MonoBehaviour
+public class Bow : BaseWeapon
 {
-    [Tooltip("Prefab to shoot")]
-    [SerializeField] private Arrow arrowPrefab;
-    [Tooltip("Projectile force")]
-    [SerializeField] private float shootingForce;
-    [Tooltip("End point of gun where shots appear")]
-    [SerializeField] private Transform shootPosition;
-    [Tooltip("Time between shots / smaller = higher rate of fire")]
-    [SerializeField] private float cooldownWindow;
-
-    private float nextTimeToShoot;
-
-    ObjectPool<Arrow> arrowPool;
+    ObjectPool<GameObject> arrowPool;
 
     private void Awake()
     {
-        arrowPool = new ObjectPool<Arrow>(CreatePoolItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, 100);
+        arrowPool = new ObjectPool<GameObject>(CreatePoolItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, 100);
     }
 
-    private void OnDestroyPoolObject(Arrow arrow)
+    private void OnDestroyPoolObject(GameObject arrow)
     {
-        Destroy(arrow.gameObject);
+        Destroy(arrow);
     }
 
-    private void OnReturnedToPool(Arrow arrow)
+    private void OnReturnedToPool(GameObject arrow)
     {
-        arrow.gameObject.SetActive(false);
+        arrow.SetActive(false);
     }
 
-    private void OnTakeFromPool(Arrow arrow)
+    private void OnTakeFromPool(GameObject arrow)
     {
-        arrow.gameObject.SetActive(true);
+        arrow.SetActive(true);
+        Rigidbody rb = arrow.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 
-    private Arrow CreatePoolItem()
+    private GameObject CreatePoolItem()
     {
-        Arrow arrow = Instantiate(arrowPrefab);
-        arrow.gameObject.SetActive(false);
-        arrow.pool = arrowPool;
+        GameObject arrow = Instantiate(weaponData.projectil);
+        BaseProjectil baseProjectil = arrow.GetComponent<BaseProjectil>();
+        baseProjectil.pool = arrowPool;
+        arrow.SetActive(false);
         return arrow;
     }
 
     private void Update()
     {
-        if (Input.GetButton("Fire1") && Time.time > nextTimeToShoot)
+        if (Input.GetButton("Fire1") && CanShoot())
         {
             Shoot();
         }
     }
 
-    private void Shoot()
+    public override void Shoot()
     {
-        Arrow arrowInstance = arrowPool.Get();
-
+        GameObject arrowInstance = arrowPool.Get();
         arrowInstance.transform.SetPositionAndRotation(shootPosition.position, Quaternion.identity);
 
-        // Apply force to the projectile
-        arrowInstance.GetComponent<Rigidbody>().AddForce(shootPosition.forward.normalized * shootingForce, ForceMode.Impulse);
+        Rigidbody rb = arrowInstance.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.AddForce(shootPosition.forward * weaponData.shootingForce, ForceMode.Impulse);
+        }
 
-        // Set the cooldown for the next shot
-        nextTimeToShoot = Time.time + cooldownWindow;
+        nextTimeToShoot = Time.time + weaponData.cooldownWindow;
+        // OnShoot?.Invoke(); // Notifica a otros sistemas
     }
 }
