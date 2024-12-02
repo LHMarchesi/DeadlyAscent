@@ -123,7 +123,6 @@ public class Zombie : MonoBehaviour, IDamagable
 
         if (attackCooldownTimer <= 0)
         {
-            Debug.Log($"{enemyData.Name} attacks the player!");
             attackCooldownTimer = 1f / enemyData.AttackSpeed;
             currentState = States.followingPlayer;
         }

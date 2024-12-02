@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public abstract class BaseWeapon : MonoBehaviour, IWeapon
+public abstract class BaseWeapon : MonoBehaviour
 {
     [SerializeField] protected WeaponScriptable weaponData;
-    [SerializeField] protected Transform shootPosition;
 
     protected float nextTimeToShoot;
     public abstract void Shoot();

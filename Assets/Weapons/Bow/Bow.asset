@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a486d36f69f2cd84bb75465ea36ae7fe, type: 3}
-  m_Name: ArrowData
+  m_Script: {fileID: 11500000, guid: 9685982f29d12844d8d8db0fc19be8b1, type: 3}
+  m_Name: Bow
   m_EditorClassIdentifier: 
-  Name: 
-  BaseDamage: 0
+  Name: Bow
+  BaseDamage: 35
+  cooldownWindow: 1
+  projectil: {fileID: 1589193197712395789, guid: 01003141edf33f843afc95ad82df6fdf, type: 3}
+  shootingForce: 300

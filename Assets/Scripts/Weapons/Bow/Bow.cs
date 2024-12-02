@@ -7,7 +7,7 @@ public class Bow : BaseWeapon
 
     private void Awake()
     {
-        arrowPool = new ObjectPool<GameObject>(CreatePoolItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, 100);
+      //  arrowPool = new ObjectPool<GameObject>(CreatePoolItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject, false, 10, 100);
     }
 
     private void OnDestroyPoolObject(GameObject arrow)
@@ -28,14 +28,14 @@ public class Bow : BaseWeapon
         rb.angularVelocity = Vector3.zero;
     }
 
-    private GameObject CreatePoolItem()
+   /* private GameObject CreatePoolItem()
     {
-        GameObject arrow = Instantiate(weaponData.projectil);
+       // GameObject arrow = Instantiate(weaponData.projectil);
         BaseProjectil baseProjectil = arrow.GetComponent<BaseProjectil>();
         baseProjectil.pool = arrowPool;
         arrow.SetActive(false);
         return arrow;
-    }
+    }*/
 
     private void Update()
     {
@@ -48,14 +48,14 @@ public class Bow : BaseWeapon
     public override void Shoot()
     {
         GameObject arrowInstance = arrowPool.Get();
-        arrowInstance.transform.SetPositionAndRotation(shootPosition.position, Quaternion.identity);
+     //   arrowInstance.transform.SetPositionAndRotation(shootPosition.position, Quaternion.identity);
 
         Rigidbody rb = arrowInstance.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.AddForce(shootPosition.forward * weaponData.shootingForce, ForceMode.Impulse);
+           // rb.AddForce(shootPosition.forward * weaponData.shootingForce, ForceMode.Impulse);
         }
 
         nextTimeToShoot = Time.time + weaponData.cooldownWindow;
